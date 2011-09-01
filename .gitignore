@@ -12,3 +12,4 @@ lighttpd*
 static
 credentials.py
 smspipeline
+mail.py

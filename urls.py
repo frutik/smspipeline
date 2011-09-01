@@ -6,7 +6,12 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'django_tests.views.home', name='home'),
+    url(r'^$', 'app.views.home', name='home'),
+    
+    #url(r'^accounts/login/$', 'django.contrib.auth.views.login', name="login"),
+    #url(r'^accounts/logout/$', 'django.contrib.auth.views.logout_then_login', name="logout"),
+    url(r'^accounts/', include('registration.urls')),
+    
     # url(r'^django_tests/', include('django_tests.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

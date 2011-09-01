@@ -7,11 +7,11 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'smspipeline.settings'
 from pipelines.models import Pipeline
 from targets.models import TargetRunnerFactory
 
-try:
-    pipe, message = Pipeline.getSMS('430913', '1313 resend test test test 12')
-except:
-    print 'pipe not found'
-    sys.exit()	
+#try:
+pipe, message = Pipeline.getSMS('430913', '1313 resend test test test 12')
+#except:
+#    print 'pipe not found'
+#    sys.exit()	
 
 msg = message.get()
 

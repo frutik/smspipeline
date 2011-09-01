@@ -64,7 +64,17 @@ class TwitterTargetRunner(TargetRunner):
 	api.update_status(message)	
 
 class MailTargetRunner(TargetRunner):
-    pass
+
+    def __init__(self, target_options):
+
+	self.EMAIL = target_options.mailtarget.email
+
+    def send(self,message):
+	print self, message
+
+	from django.core.mail import send_mail
+	
+	#send_mail('test message from smspipe service', message, 'root@localhost', [self.EMAIL], fail_silently=False)
 	
 class TargetRunnerFactory:
 
