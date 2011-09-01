@@ -11,6 +11,7 @@ TARGET_CHOICES = (
 class Target(models.Model):
     title = models.CharField(max_length=255)
     kind = models.CharField(max_length=255, editable=False, choices=TARGET_CHOICES)
+    enabled = models.BooleanField()
 
     def __unicode__(self):
         return self.title

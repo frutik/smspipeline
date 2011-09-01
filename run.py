@@ -16,5 +16,6 @@ except:
 msg = message.get()
 
 for target in pipe.targets.all():
-    target_runner = TargetRunnerFactory.get_runner(target)
-    target_runner.send(msg)
+    if target.enabled:
+	target_runner = TargetRunnerFactory.get_runner(target)
+	target_runner.send(msg)
