@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 TWITTER='twitter'
 MAIL='mail'
@@ -12,6 +13,7 @@ class Target(models.Model):
     title = models.CharField(max_length=255)
     kind = models.CharField(max_length=255, editable=False, choices=TARGET_CHOICES)
     enabled = models.BooleanField()
+    owner = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.title

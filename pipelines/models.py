@@ -1,17 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 from targets.models import Target
 
 class AdressBook(models.Model):
     title = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255) 
-
-    def __unicode__(self):
-        return self.title
-
-class Command(models.Model):
-    title = models.CharField(max_length=255)
-    command = models.CharField(max_length=255)
-    regexp = models.CharField(max_length=255, blank=True)
+    owner = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.title
@@ -20,6 +15,7 @@ class MessageTemplate(models.Model):
     title = models.CharField(max_length=255)
     regexp = models.CharField(max_length=255, blank=True)
     template = models.TextField(blank=True)
+    owner = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.title
@@ -37,6 +33,7 @@ class Pipeline(models.Model):
     targets = models.ManyToManyField(Target) 
 
     enabled = models.BooleanField()
+    owner = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.title
