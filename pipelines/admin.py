@@ -15,6 +15,6 @@ class MessageTemplateAdmin(admin.ModelAdmin):
     pass
     
 admin.site.register(AdressBook, AdressBookAdmin)
-admin.site.register(Command, CommandAdmin)
+#admin.site.register(Command, CommandAdmin)
 admin.site.register(Pipeline, PipelineAdmin)
 admin.site.register(MessageTemplate, MessageTemplateAdmin)

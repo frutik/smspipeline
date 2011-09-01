@@ -11,3 +11,4 @@ lighttpd*
 .idea
 static
 credentials.py
+smspipeline
