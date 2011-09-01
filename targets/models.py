@@ -40,6 +40,12 @@ class TargetRunner(object):
 
 class TwitterTargetRunner(TargetRunner):
 
+    #TODO constructor???
+    def set_options(self, target):
+
+	self.ACCESS_KEY = target.twittertarget.access_key
+	self.ACCESS_SECRET = target.twittertarget.access_secret
+
     def send(self,message):
 	print self, message
 
@@ -47,16 +53,12 @@ class TwitterTargetRunner(TargetRunner):
 	
 	auth = tweepy.OAuthHandler(targets.credentials.CONSUMER_KEY, targets.credentials.CONSUMER_SECRET)
 	
-	# per user from db
-	auth.set_access_token(targets.credentials.ACCESS_KEY, targets.credentials.ACCESS_SECRET)
+	auth.set_access_token(self.ACCESS_KEY, self.ACCESS_SECRET)
 	api = tweepy.API(auth)
 	api.update_status(message)	
-	
 
 class MailTargetRunner(TargetRunner):
     pass
-
-
 	
 class TargetRunnerFactory:
 
