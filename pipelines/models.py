@@ -44,10 +44,8 @@ class Pipeline(models.Model):
     @staticmethod
     def getSMS(sender, sms):
 	pin, command, message_txt = sms.split(' ', 2)
-	
-	print 'pin:', pin, 'command:', command, 'message:', message_txt
-	
-	pipeline = Pipeline.objects.get(pin=pin, senders__phone_number=sender, command=command)
+
+	pipeline = Pipeline.objects.get(pin=pin, senders__phone_number=sender, command=command, enabled=True)
 
 	return pipeline, Message(message_txt, pipeline.message_template)
 
