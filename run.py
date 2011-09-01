@@ -16,6 +16,6 @@ pipe, message = Pipeline.getSMS('430913', '1313 resend test test test 12')
 msg = message.get()
 
 for target in pipe.targets.all():
-    if target.enabled:
-	target_runner = TargetRunnerFactory.get_runner(target)
+    target_runner = TargetRunnerFactory.get_runner(target)
+    if target_runner.enabled:
 	target_runner.send(msg)
