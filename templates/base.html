@@ -7,10 +7,14 @@
     <link rel="stylesheet" type="text/css" href="http://localhost/bootstrap-1.0.0.min.css">
   </head>
   <body>
+
+    <div id="auth">{% if user.is_anonymous %}<a href="{% url auth_login %}">Login</a>{% else %}{{ user }} <a href="{% url auth_logout %}">Logout</a>{% endif %}</div>
+
     <ul>
-	<li><a href="">Main</a></li>
-	<li>Pipelines</li>
-	<li>Targets</li>
+	<li><a href="{% url home %}">Main</a></li>
+	{% if not user.is_anonymous %}
+	<li><a href="{% url pipelines_show_all %}">Pipelines</a></li>
+	<li><a href="{% url targets_show_all %}">Targets</a></li>{% endif %}
     <ul>
 
     <div class="content" id="content">{% block content %}{% endblock %}</div>
