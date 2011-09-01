@@ -1,0 +1,13 @@
+.settings
+.rockstarapps
+.project
+*.pyc
+.DS_Store
+.Trashes
+.fseventsd
+.tmp_*
+lighttpd*
+.pydevproject
+.idea
+static
+credentials.py
