@@ -20,7 +20,9 @@
 	    {% if not user.is_anonymous %}
 	    <li{% if request.path == '/pipelines/' %} class="active"{% endif %}><a href="{% url pipelines_show_all %}">Pipelines</a></li>
 	    <li{% if request.path == '/targets/' %} class="active"{% endif %}><a href="{% url targets_show_all %}">Targets</a></li>
-	    {% if user.is_superuser %}<li><a href="/admin/">Admin</a></li>{% endif %} 
+        <li{% if request.path == '/message_template/' %} class="active"{% endif %}><a href="{% url message_template_show_all %}">Templates</a></li>
+        <li{% if request.path == '/adressbook/' %} class="active"{% endif %}><a href="{% url adressbook_show_all %}">Adressbook</a></li>
+	    {% if user.is_superuser %}<li><a href="/admin/">Admin</a></li>{% endif %}
 	    {% endif %}
           </ul> 
           <ul class="nav secondary-nav"> 
@@ -38,8 +40,12 @@
       {% block content %}{% endblock %}
     </div>
     <footer>
-        <p>&copy; SMS pipeline engine 2011</p>
+        <div class="container">
+          <p class="right" style="float: right;"><a href="#">Back to top</a></p>
+          <p>&copy; SMS pipeline engine 2011</p>
+        </div>
       </footer>
+</div>
 </div>
 </body>
 </html>

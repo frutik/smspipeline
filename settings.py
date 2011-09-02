@@ -126,6 +126,8 @@ INSTALLED_APPS = (
     'pipelines',
     'targets',
     'registration',
+    'adressbook',
+    'message_template',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
