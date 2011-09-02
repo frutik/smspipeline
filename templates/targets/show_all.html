@@ -4,5 +4,48 @@
 
 <h2>Targets</h2>
 
+<div class="well">
+    <button class="btn primary" onclick="$('#create_form').show();">Create new</button>&nbsp;
+    <button class="btn" disabled>Other action</button>
+</div>
+<table class="zebra-striped">
+<thead>
+    <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Active</th>
+    </tr>
+</thead>
+{% for target in targets %}
+<tbody>
+    <tr>
+        <td width="5px;"><input type="checkbox" class="target_item" id="trg_{{ target.id }}" /></td>
+        <td>{{ target.title }}</td>
+        <td>{{ target.kind }}</td>
+        <td>{{ target.enabled }}</td>
+    </tr>
+</tbody>
+{% endfor %}
+</table>
+
+<!-- Modal -->
+<div id="create_form" class="modal" style="width: 800px; position: absolute; top: 100px; left: 50px; margin: 0 auto; z-index: 1; display: none;">
+  <div class="modal-header">
+    <h3>Create new target</h3>
+    <a href="#" class="close" onclick="$('#create_form').hide();">&times;</a>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+      <p>One fine body…</p>
+      <p>One fine body…</p>
+      <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn primary">Save</a>
+    <a href="#" class="btn secondary" onclick="$('#create_form').hide();">Cancel</a>
+  </div>
+</div>
+
 {% endblock %}
 

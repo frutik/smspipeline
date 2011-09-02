@@ -4,13 +4,14 @@
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <title>sms pipeline engine</title>
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/_main.css" />
-    <link rel="stylesheet" type="text/css" href="http://localhost/bootstrap-1.0.0.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost/bootstrap-1.1.1.min.css" />
+    <script src="http://code.jquery.com/jquery-1.6.2.min.js" type="text/javascript"></script>
   </head>
   <body>
   <div class="topbar-wrapper" style="z-index: 5;"> 
     <div class="topbar"> 
       <div class="fill"> 
-        <div class="container"> 
+        <div class="container">
           <h3><a href="#">SMS Pipeline engine</a></h3> 
           <ul> 
             <!-- li{% if request.path == '/' %} class="active"{% endif %}><a href="/" rel="home">Головна</a></li> 
@@ -30,9 +31,15 @@
       </div> <!-- /fill --> 
     </div> <!-- /topbar --> 
   </div> <!-- topbar-wrapper -->
-  <br clear="all">
-  
-  {{ request.path }}   
-  <div class="content" id="content">{% block content %}{% endblock %}</div>
+    <div class="container" style="position: relative;">
+    <div style="height:50px;"></div>
+    <div class="content">
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+    <footer>
+        <p>&copy; SMS pipeline engine 2011</p>
+      </footer>
+</div>
 </body>
 </html>
