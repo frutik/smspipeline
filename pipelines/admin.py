@@ -1,16 +1,7 @@
-from pipelines.models import AdressBook
-from pipelines.models import Pipeline, MessageTemplate
 from django.contrib import admin
+from pipelines.models import Pipeline
 
-class AdressBookAdmin(admin.ModelAdmin):
-    pass
-    
 class PipelineAdmin(admin.ModelAdmin):
-    pass
+    list_display_links = list_display = ('title', 'owner')
 
-class MessageTemplateAdmin(admin.ModelAdmin):
-    pass
-    
-admin.site.register(AdressBook, AdressBookAdmin)
 admin.site.register(Pipeline, PipelineAdmin)
-admin.site.register(MessageTemplate, MessageTemplateAdmin)

@@ -1,6 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Message templates</h1>
+<h1>Message templates</h1>
+<div class="well">
+    <button class="btn primary" disabled>Create template</button>&nbsp;
+</div>
+
+{% if  templates %}
+<table class="zebra-striped">
+<thead>
+    <tr>
+        <th>#</th>
+        <th>Title</th>
+    </tr>
+</thead>
+{% for item in templates %}
+<tbody>
+    <tr>
+        <td width="5px;"><input type="checkbox" class="list_item" id="trg_{{ item.id }}" /></td>
+        <td>{{ item.title }}</td>
+    </tr>
+</tbody>
+{% endfor %}
+</table>
+{% else %}
+    <div class="alert-message error">
+        <p><strong>Sorry,</strong> you haven't templates.</p>
+    </div>
+{% endif %}
+
  {% endblock %}
 

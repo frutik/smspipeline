@@ -128,10 +128,21 @@ INSTALLED_APPS = (
     'registration',
     'adressbook',
     'message_template',
-    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+INSTALLED_APPS += (
+    'admin_tools',
+    'admin_tools.theming',
+    'admin_tools.menu',
+    'admin_tools.dashboard',
+    'admin_user_stats',
+    'chart_tools',
+    'django.contrib.admin',
+)
+
+ADMIN_TOOLS_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
