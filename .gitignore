@@ -9,7 +9,6 @@
 lighttpd*
 .pydevproject
 .idea
-#static
 credentials.py
 smspipeline
 mail.py
