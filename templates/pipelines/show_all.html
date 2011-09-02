@@ -2,12 +2,27 @@
 
 {% block content %}
 
-<h2>Pipelines</h2>
+{#    <div class="popover-well" style="position: relative;">#}
+{#    <div class="popover-wrapper">#}
+{#      <div id="popover" class="popover left">#}
+{#        <div class="arrow"></div>#}
+{#        <div class="inner">#}
+{#          <h3 class="title">Popover Title</h3>#}
+{#          <div class="content">#}
+{#            <p>Etiam porta sem malesuada magna mollis euismod. Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+        <h2
+{#            onmouseover="$('#popover').show();"#}
+{#            onmouseout="$('#popover').hide();"#}
+        >Pipelines</h2>
+{#    </div>#}
 
-<ul class="tabs">
-  <li class="active"><a href="#">List</a></li>
-  <li><a href="#">Execution log</a></li>
-</ul>
+    <ul class="tabs">
+        <li class="active"><a href="{% url pipelines_show_all %}">List</a></li>
+        <li><a href="{% url pipelines_execution_log %}">Execution log</a></li>
+    </ul>
 
     <div class="well">
         <button class="btn primary" onclick="$('#create_form').show();">Create new</button>&nbsp;
@@ -31,7 +46,7 @@
     </tbody>
     {% endfor %}
     </table>
-
+</div>
     <!-- Modal -->
     <div id="create_form" class="modal" style="position: absolute; top: auto; left: auto; margin: 0 auto; z-index: 1; display: none;">
       <div class="modal-header">
