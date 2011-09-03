@@ -2,5 +2,80 @@
 
 {% block content %}
     <h1>Adressbook</h1>
+
+
+    <script>
+        function showCreateDialog(id) {
+            $('#modal_body').load('/adressbook/add/');
+            $(id).show();
+        }
+    </script>
+{#    TODO: external css#}
+    <style>
+        .listNav { margin:0 0 10px; }
+        .ln-letters { overflow:hidden; }
+        .ln-letters a { font-size:0.9em; display:block; float:left; padding:2px 6px; border:1px solid silver; border-right:none; text-decoration:none; }
+        .ln-letters a.ln-last { border-right:1px solid silver; }
+        .ln-letters a:hover,
+        .ln-letters a.ln-selected { background-color:#eaeaea; }
+        .ln-letters a.ln-disabled { color:#ccc; }
+        .ln-letter-count { text-align:center; font-size:0.8em; line-height:1; margin-bottom:3px; color:#336699; }
+    </style>
+
+    <div class="well">
+        <button class="btn primary" onclick="javascript:showCreateDialog('#create_form');">Add contact</button>&nbsp;
+    </div>
+
+    {% if  records %}
+    <table class="zebra-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tbody id="myList">
+    {% for record in records %}
+    <tr class="ln-a">
+        <td width="5px;"><input type="checkbox" class="list_item" id="trg_{{ record.id }}" /></td>
+        <td>{{ record.title }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+{#    Letter navigation#}
+    <div id="myList-nav"></div>
+    <script>
+         $('#myList').listnav({
+             includeOther: true,
+             //flagDisabled: true,
+             noMatchText: 'Nothing matched your filter, please click another letter.',
+             showCounts: true,
+             cookieName: 'my-main-list',
+             //onClick: function(letter){ alert('You clicked ' + letter); },
+             prefixes: ['the','a']
+         });
+    </script>
+
+    {% else %}
+        <div class="alert-message error">
+            <p><strong>Sorry,</strong> you haven't contacts.</p>
+        </div>
+    {% endif %}
+
+    <!-- Modal -->
+    <div id="create_form" class="modal" style="width: 800px; position: absolute; top: 100px; left: 50px; margin: 0 auto; z-index: 1; display: none;">
+      <div class="modal-header">
+        <h3>Create new</h3>
+        <a href="#" class="close" onclick="$('#create_form').hide();">&times;</a>
+      </div>
+      <div class="modal-body" id="modal_body">
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn primary" onclick="$('#add_form').submit();">Save</a>
+        <a href="#" class="btn secondary" onclick="$('#create_form').hide();">Cancel</a>
+      </div>
+    </div>
  {% endblock %}
 

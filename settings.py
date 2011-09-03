@@ -71,7 +71,8 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    'libs/twitter-bootstrap',
+    #'libs/twitter-bootstrap',
+    'extras',
     '/usr/local/lib/python2.7/dist-packages/django_admin_tools-0.4.0-py2.7.egg/admin_tools/media',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
@@ -141,6 +142,10 @@ INSTALLED_APPS = (
     'adressbook',
     'message_template',
 )
+
+#INSTALLED_APPS += (
+#    'experiments',
+#)
 
 INSTALLED_APPS += (
     'admin_tools',
