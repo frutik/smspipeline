@@ -58,7 +58,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = 'static/'
+STATIC_ROOT = '/home/frutik/work/smspipeline/static'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -72,6 +72,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     'libs/twitter-bootstrap',
+    '/usr/local/lib/python2.7/dist-packages/django_admin_tools-0.4.0-py2.7.egg/admin_tools/media',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -112,6 +113,17 @@ TEMPLATE_DIRS = (
     'templates',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    # default template context processors
+    'django.core.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+
+    # required by django-admin-tools
+    'django.core.context_processors.request',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,8 +140,6 @@ INSTALLED_APPS = (
     'registration',
     'adressbook',
     'message_template',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
 )
 
 INSTALLED_APPS += (

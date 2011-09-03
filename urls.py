@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     url(r'^adressbook/', include('adressbook.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin_tools/', include('admin_tools.urls')),
 )
