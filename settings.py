@@ -183,3 +183,5 @@ LOGGING = {
 }
 
 from smspipeline.mail import *
+
+GRID_TEMPLATE='common/grid.html'

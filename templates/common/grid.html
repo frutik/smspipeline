@@ -13,7 +13,6 @@
     {% for record in records %}
     <tr class="ln-a">
         <td width="5px;"><input onchange="updateCheckboxes(this);" type="checkbox" class="list_item" id="trg_{{ record.id }}" /></td>
-
         {% for column in columns %}
             {% with key=column.key %}
                 <td>{{ record|get_attribute_by_name:key }}</td>

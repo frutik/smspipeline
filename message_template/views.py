@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 import simplejson
+from settings import GRID_TEMPLATE
 
 from message_template.models import MessageTemplate
 from message_template.forms import MessageTemplateForm
@@ -13,13 +14,18 @@ def show_all(request):
 
     records = MessageTemplate.objects.filter(owner=request.user).order_by('title')
 
+    grid_template = GRID_TEMPLATE
+    full_template = 'message_template/show_all.html'
+
     #if not request.is_ajax:
     if request.GET.get('ajax'):
-        template = 'message_template/grid.html'
+        template = grid_template
     else:
-        template = 'message_template/show_all.html'
+        template = full_template
 
-    return render_to_response(template, {'records':records}, RequestContext(request))
+    columns = records[0].grid_columns
+
+    return render_to_response(template, {'records':records, 'columns':columns, 'grid_template':grid_template}, RequestContext(request))
 
 @login_required
 def add(request):

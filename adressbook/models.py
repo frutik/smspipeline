@@ -11,8 +11,9 @@ class AdressBook(models.Model):
         {'key':'phone_number', 'label':'Phone', 'width':'150px'}
     ]
 
+    def get_attribute_by_name(self, name):
+        return self.__dict__[name]
+
     def __unicode__(self):
         return self.title
 
-    def get_attribute_by_name(self, name):
-        return self.__dict__[name]

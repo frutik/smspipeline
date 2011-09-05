@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 import simplejson
+from settings import GRID_TEMPLATE
 
 from adressbook.models import AdressBook
 from adressbook.forms import AdressBookForm
@@ -13,15 +14,18 @@ def show_all(request):
 
     records = AdressBook.objects.filter(owner=request.user).order_by('title')
 
+    grid_template = GRID_TEMPLATE
+    full_template = 'adressbook/show_all.html'
+
     #if not request.is_ajax:
     if request.GET.get('ajax'):
-        template = 'adressbook/grid.html'
+        template = grid_template
     else:
-        template = 'adressbook/show_all.html'
+        template = full_template
 
     columns = records[0].grid_columns
 
-    return render_to_response(template, {'records':records, 'columns':columns}, RequestContext(request))
+    return render_to_response(template, {'records':records, 'columns':columns, 'grid_template':grid_template}, RequestContext(request))
 
 @login_required
 def add(request):
