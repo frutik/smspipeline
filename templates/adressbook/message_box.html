@@ -1,0 +1,19 @@
+<div id="success_message" class="alert-message success" style="display:none;">
+    <a class="close" href="javascript:hide_success();">&times;</a>
+    <p id="success_message_body"></p>
+</div>
+<script type="text/javascript">
+    function show_success(message, autohide_timeout) {
+        $('#success_message_body').html(message);
+        $('#success_message').show();
+
+        if (autohide_timeout) {
+            setTimeout(hide_success, autohide_timeout);
+        }
+    }
+        
+    function hide_success() {
+        $('#success_message').hide();
+    }
+
+</script>

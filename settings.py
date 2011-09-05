@@ -143,9 +143,9 @@ INSTALLED_APPS = (
     'message_template',
 )
 
-#INSTALLED_APPS += (
-#    'experiments',
-#)
+INSTALLED_APPS += (
+    'experiments',
+)
 
 INSTALLED_APPS += (
     'admin_tools',

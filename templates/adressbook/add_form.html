@@ -2,3 +2,8 @@
 {{ form.as_p }}
 </form>
 
+<script>
+    jQuery("#add_form").submit(function(e){
+        send_add_request(e);
+    });
+</script>
