@@ -30,13 +30,6 @@ def add(request):
         form = AdressBookForm()
         return render_to_response(form_template, {'form':form, 'action':form_action}, RequestContext(request))
 
-#    if not request.POST:
-#    if request.is_ajax:
-#        # response is just the form
-#        return render(request, 'contact/fields.html', {'form':form})
-#    else:
-#        # response is the entire page
-#        return render(request, 'contact/form.html', {'form':form})
     form = AdressBookForm(request.POST)
 
     if not form.is_valid():
@@ -52,16 +45,4 @@ def add(request):
     adressbook.owner = request.user
     adressbook.save()
 
-#    import time
-#    time.sleep(30)
-
-    #TODO: message
     return HttpResponse('')
-    return HttpResponseRedirect('/adressbook/')
-#        template = "catalog/product_review.html"
-#        html = render_to_string(template, {'review': review })
-#        response = simplejson.dumps({'success':'True', 'html': html})
-
-#    return HttpResponse(response)
-#    return HttpResponse(response,
-#                        content_type='application/javascript; charset=utf-8')
