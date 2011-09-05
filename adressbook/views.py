@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.shortcuts import render_to_response, render
-from adressbook.models import AdressBook
-from adressbook.forms import AdressBookForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 import simplejson
+
+from adressbook.models import AdressBook
+from adressbook.forms import AdressBookForm
 
 @login_required
 def show_all(request):
@@ -18,7 +19,9 @@ def show_all(request):
     else:
         template = 'adressbook/show_all.html'
 
-    return render_to_response(template, {'records':records}, RequestContext(request))
+    columns = records[0].grid_columns
+
+    return render_to_response(template, {'records':records, 'columns':columns}, RequestContext(request))
 
 @login_required
 def add(request):
@@ -39,10 +42,10 @@ def add(request):
             content_type='application/javascript; charset=utf-8'
         )
 
-    adressbook = AdressBook()
-    adressbook.title = request.POST.get('title')
-    adressbook.phone_number = request.POST.get('phone_number')
-    adressbook.owner = request.user
-    adressbook.save()
+    record = AdressBook()
+    record.title = request.POST.get('title')
+    record.phone_number = request.POST.get('phone_number')
+    record.owner = request.user
+    record.save()
 
     return HttpResponse('')
