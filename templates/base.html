@@ -10,7 +10,16 @@
 
   </head>
   <body>
-  <div class="topbar-wrapper" style="z-index: 5;"> 
+  <div id="ajax_progress" style="display:none; position:absolute; right:0%; top:41px; font-family: Arial; color: #ffffff; width: 270; background: red;">&nbsp;wait please... </div>
+  <script type="text/javascript">
+      $(document).ajaxStart(function(){
+        $('#ajax_progress').show();
+      });
+      $(document).ajaxStop(function(){
+        $('#ajax_progress').hide();
+      });
+  </script>
+  <div class="topbar-wrapper" style="z-index: 5;">
     <div class="topbar"> 
       <div class="fill"> 
         <div class="container">

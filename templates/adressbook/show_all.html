@@ -6,7 +6,12 @@
 {% block content %}
     <h1>Adressbook</h1>
 
-{#    TODO: external css#}
+    {# Common js settings for this view #}
+    <script type="text/javascript">
+        var url_load_grid = '{% url adressbook_show_all %}';
+    </script>
+
+    {# TODO: external css #}
     <style>
         .listNav { margin:0 0 10px; }
         .ln-letters { overflow:hidden; }

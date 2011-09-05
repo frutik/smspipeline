@@ -13,7 +13,7 @@ def show_all(request):
 
     #if not request.is_ajax:
     if request.GET.get('ajax'):
-        template = 'adressbook/show_all_ajax.html'
+        template = 'adressbook/grid.html'
     else:
         template = 'adressbook/show_all.html'
 
@@ -47,8 +47,8 @@ def add(request):
     adressbook.owner = request.user
     adressbook.save()
 
-#    import time
-#    time.sleep(30)
+    import time
+    time.sleep(30)
 
     #TODO: message
     return HttpResponse('')
