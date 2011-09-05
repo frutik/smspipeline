@@ -41,10 +41,6 @@ def add(request):
 
     if not form.is_valid():
         return render_to_response(form_template, {'form':form, 'action':form_action}, RequestContext(request))
-        return HttpResponse(
-            simplejson.dumps({'success':'False', 'errors': form.errors}),
-            content_type='application/javascript; charset=utf-8'
-        )
 
     record = AdressBook()
     record.title = request.POST.get('title')

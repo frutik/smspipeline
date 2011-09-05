@@ -2,7 +2,7 @@
     <table class="zebra-striped">
     <thead>
         <tr>
-            <th width="5px;"><input onchange="updateAllCheckboxes(this, '.list_item');" type="checkbox" class="" id="" /></th>
+            <th width="5px;"><input onchange="updateAllCheckboxes(this);" type="checkbox" class="" id="supercheckbox" /></th>
             {% for column in columns %}
                 <th{% if column.width %} width="{{ column.width }}"{% endif %}>{{ column.label }}</th>
             {% endfor %}
