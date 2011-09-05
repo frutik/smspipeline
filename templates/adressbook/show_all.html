@@ -1,8 +1,5 @@
 {% extends "base.html" %}
 
-{#TODO:#}
-{#- focus on form after windows open#}
-
 {% block content %}
     <h1>Adressbook</h1>
 
@@ -37,7 +34,7 @@
     </script>
 
     {# Success message #}
-    {% include "adressbook/message_box.html" %}
+    {% include "common/message_box.html" %}
 
     {# Toolbar #}
     <div class="well">
@@ -57,7 +54,7 @@
     </div>
 
     {# Create dialogl #}
-    {% include "adressbook/create_window.html" %}
+    {% include "common/create_window.html" with title="Add new contact" %}
 
  {% endblock %}
 

@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response, render
 from adressbook.models import AdressBook
 from adressbook.forms import AdressBookForm
 from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
 import simplejson
 
 @login_required
@@ -21,9 +22,13 @@ def show_all(request):
 
 @login_required
 def add(request):
+
+    form_template = 'common/add_form.html'
+    form_action = reverse('adressbook_add')
+
     if request.method == 'GET':
         form = AdressBookForm()
-        return render_to_response('adressbook/add_form.html', {'form':form}, RequestContext(request))
+        return render_to_response(form_template, {'form':form, 'action':form_action}, RequestContext(request))
 
 #    if not request.POST:
 #    if request.is_ajax:
@@ -35,7 +40,7 @@ def add(request):
     form = AdressBookForm(request.POST)
 
     if not form.is_valid():
-        return render_to_response('adressbook/add_form.html', {'form':form}, RequestContext(request))
+        return render_to_response(form_template, {'form':form, 'action':form_action}, RequestContext(request))
         return HttpResponse(
             simplejson.dumps({'success':'False', 'errors': form.errors}),
             content_type='application/javascript; charset=utf-8'
@@ -47,8 +52,8 @@ def add(request):
     adressbook.owner = request.user
     adressbook.save()
 
-    import time
-    time.sleep(30)
+#    import time
+#    time.sleep(30)
 
     #TODO: message
     return HttpResponse('')
