@@ -15,7 +15,13 @@
         <td width="5px;"><input onchange="updateCheckboxes(this);" type="checkbox" class="list_item" id="trg_{{ record.id }}" /></td>
         {% for column in columns %}
             {% with key=column.key %}
-                <td>{{ record|get_attribute_by_name:key }}</td>
+                <td>
+                {% if key == 'title' %}
+                    <a href="javascript:editRecord({{ record.id }});">{{ record|get_attribute_by_name:key }}</a>
+                {% else %}
+                    {{ record|get_attribute_by_name:key }}
+                {% endif %}
+                </td>
             {% endwith %}
         {% endfor %}
     </tr>
