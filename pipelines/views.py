@@ -6,7 +6,7 @@ from pipelines.models import Pipeline
 @login_required
 def show_all(request):
 
-    pipelines = Pipeline.objects.all()
+    pipelines = Pipeline.objects.filter(owner=request.user).order_by('title')
 
     return render_to_response('pipelines/show_all.html', {'pipelines':pipelines}, RequestContext(request))
 

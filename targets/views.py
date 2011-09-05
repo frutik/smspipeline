@@ -9,7 +9,7 @@ import simplejson
 @login_required
 def show_all(request):
 
-    targets = Target.objects.all()
+    targets = Target.objects.filter(owner=request.user).order_by('title')
 
     return render_to_response('targets/show_all.html', {'targets':targets}, RequestContext(request))
 

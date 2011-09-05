@@ -6,7 +6,7 @@ from message_template.models import MessageTemplate
 @login_required
 def show_all(request):
 
-    templates = MessageTemplate.objects.all()
+    templates = MessageTemplate.objects.filter(owner=request.user).order_by('title')
 
     return render_to_response('message_template/show_all.html', {'templates':templates}, RequestContext(request))
 
