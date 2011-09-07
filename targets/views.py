@@ -1,41 +1,76 @@
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from django.shortcuts import render_to_response
-from django.http import HttpResponse, Http404
+from django.shortcuts import render_to_response, render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
+import simplejson
+from settings import GRID_TEMPLATE
+
 from targets.models import Target
 from targets.forms import MailTargetForm, TwitterTargetForm
-import simplejson
 
 @login_required
 def show_all(request):
 
-    targets = Target.objects.filter(owner=request.user).order_by('title')
+    records = Target.objects.filter(owner=request.user).order_by('title')
 
-    return render_to_response('targets/show_all.html', {'targets':targets}, RequestContext(request))
+    grid_template = GRID_TEMPLATE
+    full_template = 'targets/show_all.html'
+
+    #if not request.is_ajax:
+    if request.GET.get('ajax'):
+        template = grid_template
+    else:
+        template = full_template
+
+    context = {
+        'records':records,
+        'grid_template':grid_template
+    }
+
+    if records:
+        context['columns'] = records[0].grid_columns
+    else:
+        context['columns'] = []
+
+    context['empty_list_message'] = 'You haven\'t configured targets.'
+
+    #if Pipeline.__dict__.has_key('enabled'):
+    context['could_be_disabled'] = True
+
+    return render_to_response(template, context, RequestContext(request))
 
 @login_required
-def add_twitter(request):
-    form = MailTargetForm(request.POST)
+def add(request):
 
-    if not request.POST:
-        return render_to_response('targets/form.html', {'form':form}, RequestContext(request))
+    form_template = 'common/add_form.html'
+    form_action = reverse('pipelines_add')
 
-    if not form.is_valid():
-        html = form.errors.as_ul()
-        #response = simplejson.dumps({'success':'False', 'html': html})
-        response = html
+    if request.method == 'GET':
+        form = PipelineForm()
+        return render_to_response(form_template, {'form':form, 'action':form_action}, RequestContext(request))
+#
+#    form = PipelineForm(request.POST)
+#
+#    if not form.is_valid():
+#        return render_to_response(form_template, {'form':form, 'action':form_action}, RequestContext(request))
 
-    else:
-        review = form.save(commit=False)
-        slug = request.POST.get('slug')
-        product = Product.active.get(slug=slug)
-        review.user = request.user
-        review.product = product
-        review.save()
-        template = "catalog/product_review.html"
-        html = render_to_string(template, {'review': review })
-        response = simplejson.dumps({'success':'True', 'html': html})
+#    record = MessageTemplate()
+#    record.title = request.POST.get('title')
+#    record.regexp = request.POST.get('regexp')
+#    record.template = request.POST.get('template')
+#    record.owner = request.user
+#    record.save()
 
-    return HttpResponse(response)
-#    return HttpResponse(response,
-#                        content_type='application/javascript; charset=utf-8')
+    return HttpResponse('')
+
+@login_required
+def change_many(request):
+
+    import time
+    time.sleep(10)
+
+    print request.POST.get('ids')
+    print request.POST.get('state')
+
+    return HttpResponse('hhhh')

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from settings import MEDIUM_COLUMN_WIDTH
 
 TWITTER='twitter'
 MAIL='mail'
@@ -14,6 +15,15 @@ class Target(models.Model):
     kind = models.CharField(max_length=255, editable=False, choices=TARGET_CHOICES)
     enabled = models.BooleanField()
     owner = models.ForeignKey(User)
+
+    grid_columns = [
+        {'key':'title', 'label':'Title'},
+        {'key':'kind', 'label':'Type', 'width':MEDIUM_COLUMN_WIDTH},
+        {'key':'enabled', 'label':'Active', 'width':MEDIUM_COLUMN_WIDTH}
+    ]
+
+    def get_attribute_by_name(self, name):
+        return self.__dict__[name]
 
     def __unicode__(self):
         return self.title

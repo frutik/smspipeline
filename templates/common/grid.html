@@ -9,10 +9,12 @@
         </tr>
     </thead>
     <tbody id="myList">
+    <form id="recordset" method="post" action="{{ action }}">
+    <input id="recordset_action" type="hidden" name="action" value=""/>{% csrf_token %}
     {% load grid_extras %}
     {% for record in records %}
     <tr class="ln-a">
-        <td width="5px;"><input onchange="updateCheckboxes(this);" type="checkbox" class="list_item" id="trg_{{ record.id }}" /></td>
+        <td width="5px;"><input value="{{ record.id }}" name="record_id" onchange="updateCheckboxes(this);" type="checkbox" class="list_item" id="record_{{ record.id }}" /></td>
         {% for column in columns %}
             {% with key=column.key %}
                 <td>
@@ -26,8 +28,15 @@
         {% endfor %}
     </tr>
     {% endfor %}
+    </form>
     </tbody>
     </table>
+    <script>
+        jQuery("#recordset").submit(function(e){
+            submitGridMassAction(e);
+        });
+    </script>
+
 {#    Letter navigation#}
     <div id="myList-nav"></div>
     <script>
@@ -44,7 +53,7 @@
 
     {% else %}
         <div class="alert-message error">
-            <p><strong>Sorry,</strong> you haven't contacts.</p>
+            <p>{{ empty_list_message|default:"<strong>Sorry,</strong> you haven't records." }}</p>
         </div>
     {% endif %}
 

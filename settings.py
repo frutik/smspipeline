@@ -103,6 +103,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -132,6 +133,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.flatpages',
     #'mlang',
     # Uncomment the next line to enable the admin:
     #'sharded',
@@ -185,3 +187,4 @@ LOGGING = {
 from smspipeline.mail import *
 
 GRID_TEMPLATE='common/grid.html'
+MEDIUM_COLUMN_WIDTH='150px'

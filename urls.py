@@ -19,3 +19,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),
 )
+
+urlpatterns += patterns('django.contrib.flatpages.views',
+    (r'^(?P<url>.*)$', 'flatpage'),
+)

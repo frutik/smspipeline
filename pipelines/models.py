@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from targets.models import Target
 from message_template.models import MessageTemplate
 from adressbook.models import AdressBook
+from settings import MEDIUM_COLUMN_WIDTH
 
 class Pipeline(models.Model):
     title = models.CharField(max_length=255)
@@ -19,6 +20,15 @@ class Pipeline(models.Model):
 
     enabled = models.BooleanField()
     owner = models.ForeignKey(User)
+
+    grid_columns = [
+        {'key':'title', 'label':'Title'},
+        {'key':'enabled', 'label':'Enabled', 'width':MEDIUM_COLUMN_WIDTH},
+    ]
+
+    # TODO DRY
+    def get_attribute_by_name(self, name):
+        return self.__dict__[name]
 
     def __unicode__(self):
         return self.title

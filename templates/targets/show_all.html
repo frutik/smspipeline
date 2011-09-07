@@ -4,73 +4,102 @@
 
 <h2>Targets</h2>
 
-<div class="well">
-    <button class="btn primary" onclick="$('#create_form').show();">Create new</button>&nbsp;
-    <button class="btn" disabled>Other action</button>
-</div>
+{#<div class="well">#}
+{#    <button class="btn primary" onclick="$('#create_form').show();">Create new</button>&nbsp;#}
+{#    <button class="btn" disabled>Other action</button>#}
+{#</div>#}
+{##}
+{#<style>#}
+{#    .listNav { margin:0 0 10px; }#}
+{#    .ln-letters { overflow:hidden; }#}
+{#    .ln-letters a { font-size:0.9em; display:block; float:left; padding:2px 6px; border:1px solid silver; border-right:none; text-decoration:none; }#}
+{#    .ln-letters a.ln-last { border-right:1px solid silver; }#}
+{#    .ln-letters a:hover,#}
+{#    .ln-letters a.ln-selected { background-color:#eaeaea; }#}
+{#    .ln-letters a.ln-disabled { color:#ccc; }#}
+{#    .ln-letter-count { text-align:center; font-size:0.8em; line-height:1; margin-bottom:3px; color:#336699; }#}
+{#</style>#}
+{##}
+{#<table class="zebra-striped">#}
+{#<thead>#}
+{#    <tr>#}
+{#        <th>#</th>#}
+{#        <th>Title</th>#}
+{#        <th width="150">Type</th>#}
+{#        <th width="150">Active</th>#}
+{#    </tr>#}
+{#</thead>#}
+{#<tbody id="myList">#}
+{#{% for target in targets %}#}
+{#    <tr class="ln-a">#}
+{#        <td width="5px;" align="center"><input type="checkbox" class="target_item" id="trg_{{ target.id }}" /></td>#}
+{#        <td align="left">{{ target.title }}</td>#}
+{#        <td align="center">{{ target.kind }}</td>#}
+{#        <td align="center">{{ target.enabled }}</td>#}
+{#    </tr>#}
+{#{% endfor %}#}
+{#</tbody>#}
+{#</table>#}
+{##}
+{#<div id="myList-nav"></div>#}
+{##}
+{#<script>#}
+{#     $('#myList').listnav();#}
+{#</script>#}
+{##}
+{##}
+{#<!-- Modal -->#}
+{#<div id="create_form" class="modal" style="width: 800px; position: absolute; top: 100px; left: 50px; margin: 0 auto; z-index: 1; display: none;">#}
+{#  <div class="modal-header">#}
+{#    <h3>Create new target</h3>#}
+{#    <a href="#" class="close" onclick="$('#create_form').hide();">&times;</a>#}
+{#  </div>#}
+{#  <div class="modal-body">#}
+{##}
+{#      <ul class="pills">#}
+{#  <li class="active"><a href="#">Twitter</a></li>#}
+{#  <li><a href="#">Mail</a></li>#}
+{#</ul>#}
+{##}
+{#    <p>One fine body…</p>#}
+{#      <p>One fine body…</p>#}
+{#      <p>One fine body…</p>#}
+{#      <p>One fine body…</p>#}
+{#  </div>#}
+{#  <div class="modal-footer">#}
+{#    <a href="#" class="btn primary">Save</a>#}
+{#    <a href="#" class="btn secondary" onclick="$('#create_form').hide();">Cancel</a>#}
+{#  </div>#}
+{#</div>#}
+    {# Common js settings for this view #}
+    <script type="text/javascript">
+        var url_load_grid = '{% url targets_show_all %}';
+        var url_record_add = '{% url targets_add %}';
+    </script>
 
-<style>
-    .listNav { margin:0 0 10px; }
-    .ln-letters { overflow:hidden; }
-    .ln-letters a { font-size:0.9em; display:block; float:left; padding:2px 6px; border:1px solid silver; border-right:none; text-decoration:none; }
-    .ln-letters a.ln-last { border-right:1px solid silver; }
-    .ln-letters a:hover,
-    .ln-letters a.ln-selected { background-color:#eaeaea; }
-    .ln-letters a.ln-disabled { color:#ccc; }
-    .ln-letter-count { text-align:center; font-size:0.8em; line-height:1; margin-bottom:3px; color:#336699; }
-</style>
+    <link rel="stylesheet" type="text/css" href="http://localhost/smspipeline/assets/css/show_all.css" />
+    <script type="text/javascript" src="http://localhost/smspipeline/assets/js/all.js"></script>
 
-<table class="zebra-striped">
-<thead>
-    <tr>
-        <th>#</th>
-        <th>Title</th>
-        <th width="150">Type</th>
-        <th width="150">Active</th>
-    </tr>
-</thead>
-<tbody id="myList">
-{% for target in targets %}
-    <tr class="ln-a">
-        <td width="5px;" align="center"><input type="checkbox" class="target_item" id="trg_{{ target.id }}" /></td>
-        <td align="left">{{ target.title }}</td>
-        <td align="center">{{ target.kind }}</td>
-        <td align="center">{{ target.enabled }}</td>
-    </tr>
-{% endfor %}
-</tbody>
-</table>
+    {# Success message #}
+    {% include "common/message_box.html" %}
 
-<div id="myList-nav"></div>
+    {# Toolbar #}
+    <div class="well">
+        <a href="#" class="toolbarbtn btn primary" onclick="javascript:showCreateDialog('#create_form');">Add target</a>&nbsp;
+        <a href="#" id="delete_many" title="Delete" class="toolbarbtn btn disabled massaction" onclick="javascript:Grid.doMassAction(this);">Delete</a>&nbsp;
+        {% if could_be_disabled %}
+            <a href="#" id="disable_many" title="Disable" class="toolbarbtn btn disabled massaction" onclick="javascript:Grid.doMassAction(this);">Disable</a>&nbsp;
+            <a href="#" id="enable_many" title="Enable" class="toolbarbtn btn disabled massaction" onclick="javascript:Grid.doMassAction(this);">Enable</a>&nbsp;
+        {% endif %}
+    </div>
 
-<script>
-     $('#myList').listnav();
-</script>
+    {# Records table #}
+    <div id="records_list">
+        {% include grid_template with action='/targets/change_many/' %}
+    </div>
 
-
-<!-- Modal -->
-<div id="create_form" class="modal" style="width: 800px; position: absolute; top: 100px; left: 50px; margin: 0 auto; z-index: 1; display: none;">
-  <div class="modal-header">
-    <h3>Create new target</h3>
-    <a href="#" class="close" onclick="$('#create_form').hide();">&times;</a>
-  </div>
-  <div class="modal-body">
-
-      <ul class="pills">
-  <li class="active"><a href="#">Twitter</a></li>
-  <li><a href="#">Mail</a></li>
-</ul>
-
-    <p>One fine body…</p>
-      <p>One fine body…</p>
-      <p>One fine body…</p>
-      <p>One fine body…</p>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn primary">Save</a>
-    <a href="#" class="btn secondary" onclick="$('#create_form').hide();">Cancel</a>
-  </div>
-</div>
+    {# Create dialogl #}
+    {% include "common/create_window.html" with title="Add new target" %}
 
 {% endblock %}
 
