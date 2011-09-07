@@ -2,7 +2,7 @@
     <table class="zebra-striped">
     <thead>
         <tr>
-            <th width="5px;"><input onchange="updateAllCheckboxes(this);" type="checkbox" class="" id="supercheckbox" /></th>
+            <th width="5px;"><input onchange="javascript:Grid.updateAllCheckboxes(this);" type="checkbox" class="" id="supercheckbox" /></th>
             {% for column in columns %}
                 <th{% if column.width %} width="{{ column.width }}"{% endif %}>{{ column.label }}</th>
             {% endfor %}
@@ -14,7 +14,7 @@
     {% load grid_extras %}
     {% for record in records %}
     <tr class="ln-a">
-        <td width="5px;"><input value="{{ record.id }}" name="record_id" onchange="updateCheckboxes(this);" type="checkbox" class="list_item" id="record_{{ record.id }}" /></td>
+        <td width="5px;"><input value="{{ record.id }}" name="record_id" onchange="javascript:Grid.updateCheckbox(this);" type="checkbox" class="list_item" id="record_{{ record.id }}" /></td>
         {% for column in columns %}
             {% with key=column.key %}
                 <td>

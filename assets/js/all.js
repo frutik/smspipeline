@@ -101,7 +101,35 @@ var Grid = new function() {
 
     this.reload = function() {
         jQuery("#records_list").load(url_load_grid + '?ajax=1');
+    };
+
+    this.updateCheckbox = function(checkbox) {
+        if (checkbox.checked) {
+            $('#supercheckbox').attr('checked', true);
+            $('.massaction').removeClass('disabled');
+        } else {
+            var checked = 0;
+            $('.list_item').each(function() {
+                if (this.checked) {
+                    checked++;
+                }
+            });
+            if (checked == 0) {
+                $('#supercheckbox').attr('checked', false);
+                $('.massaction').addClass('disabled');
+            }
+        }
+    };
+
+    this.updateAllCheckboxes = function(checkbox) {
+        $('.list_item').attr('checked', checkbox.checked);
+        if (checkbox.checked) {
+            $('.massaction').removeClass('disabled');
+        } else {
+            $('.massaction').addClass('disabled');
+        }
     }
+
 };
 
 function hide_create_window() {
@@ -159,33 +187,6 @@ function showCreateDialog(id) {
 
 function editRecord(id) {
     showCreateDialog('#create_form');
-}
-
-function updateCheckboxes(checkbox) {
-    if (checkbox.checked) {
-        $('#supercheckbox').attr('checked', true);
-        $('.massaction').removeClass('disabled');
-    } else {
-        var checked = 0;
-        $('.list_item').each(function() {
-            if (this.checked) {
-                checked++;
-            }
-        });
-        if (checked == 0) {
-            $('#supercheckbox').attr('checked', false);
-            $('.massaction').addClass('disabled');
-        }
-    }
-}
-
-function updateAllCheckboxes(checkbox) {
-    $('.list_item').attr('checked', checkbox.checked);
-    if (checkbox.checked) {
-        $('.massaction').removeClass('disabled');
-    } else {
-        $('.massaction').addClass('disabled');
-    }
 }
 
 function submitGridMassAction(e){
