@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.shortcuts import render_to_response, render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseServerError
 from django.core.urlresolvers import reverse
 import simplejson
 from settings import GRID_TEMPLATE
@@ -64,13 +64,28 @@ def add(request):
 
     return HttpResponse('')
 
+def set_enabled_many(ids, state):
+    records = Target.objects.in_bulk(map(int,ids))
+    for k,record in records.items():
+        record.enabled = state
+        record.save()
+    return HttpResponse('')
+
+def enable_many(ids):
+    return set_enabled_many(ids, True)
+
+def disable_many(ids):
+    return set_enabled_many(ids, False)
+
+def delete_many(ids):
+    return HttpResponse('')
+
+MASS_ACTION_HANDLER = {
+    'delete_many': delete_many,
+    'enable_many': enable_many,
+    'disable_many': disable_many,
+}
+
 @login_required
 def change_many(request):
-
-    import time
-    time.sleep(10)
-
-    print request.POST.get('ids')
-    print request.POST.get('state')
-
-    return HttpResponse('hhhh')
+    return MASS_ACTION_HANDLER[str(request.POST.get('action'))](request.POST.getlist('record_id'))

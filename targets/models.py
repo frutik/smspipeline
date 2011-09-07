@@ -76,23 +76,22 @@ class TwitterTargetRunner(TargetRunner):
 class MailTargetRunner(TargetRunner):
 
     def __init__(self, target_options):
-
-	self.EMAIL = target_options.mailtarget.email
+        self.EMAIL = target_options.mailtarget.email
 
     def send(self,message):
-	print self, message
+        print self, message
 
-	from django.core.mail import send_mail
-	
-	#send_mail('test message from smspipe service', message, 'root@localhost', [self.EMAIL], fail_silently=False)
+        from django.core.mail import send_mail
+
+        #send_mail('test message from smspipe service', message, 'root@localhost', [self.EMAIL], fail_silently=False)
 	
 class TargetRunnerFactory:
 
     RUNNERS = {
-	TWITTER: TwitterTargetRunner, 
-	MAIL: MailTargetRunner
+        TWITTER: TwitterTargetRunner,
+        MAIL: MailTargetRunner
     }
         
     @staticmethod
     def get_runner(target_options):
-	return TargetRunnerFactory.RUNNERS[target_options.kind](target_options)
+        return TargetRunnerFactory.RUNNERS[target_options.kind](target_options)

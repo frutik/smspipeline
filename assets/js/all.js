@@ -31,26 +31,42 @@ var Grid = new function() {
             return false;
         }
 
-        this.setupActiveButton(pressed_button);
-        this.blockToolbarButtons();
+        that.setupActiveButton(pressed_button);
+        that.blockToolbarButtons();
 
-        jQuery('#recordset_action').value = element.id;
+        jQuery('#recordset_action').val(element.id);
         jQuery('#recordset').submit();
     };
 
-    this.massActionError = function() {
+    this.massActionError = function(xhr, ajaxOptions, thrownError) {
         that.restoreActiveButton();
         that.releaseToolbarButtons();
 
-        alert('error');
+        message = jQuery('#success_message');
+        that.resetMessage(message);
+        message.addClass('error');
+        jQuery('#success_message_body').html('fault');
+        message.show();
     };
 
-    this.massActionSuccess = function() {
+    this.massActionSuccess = function(json) {
         that.restoreActiveButton();
         that.releaseToolbarButtons();
 
-        alert('success');
+        message = jQuery('#success_message');
+        that.resetMessage(message);
+        message.addClass('success');
+        jQuery('#success_message_body').html('success');
+        message.show();
+
+        that.reload();
     };
+
+    this.resetMessage = function(message) {
+        message.removeClass('success');
+        message.removeClass('error');
+        message.removeClass('info');
+    }
 
     this.setupActiveButton = function(pressed_button) {
         pressed_button.addClass('toolbar_ajax_blocker');
@@ -82,15 +98,11 @@ var Grid = new function() {
             }
         });
     };
-};
 
-//function do_submit() {
-//    jQuery("#add_form").submit();
-//}
-//
-//function do_cancel() {
-//    hide_create_window();
-//}
+    this.reload = function() {
+        jQuery("#records_list").load(url_load_grid + '?ajax=1');
+    }
+};
 
 function hide_create_window() {
     jQuery('#create_form').hide();
