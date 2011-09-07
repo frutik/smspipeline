@@ -25,13 +25,13 @@ var Grid = new function() {
     var that = this;
 
     this.doMassAction = function (element) {
-        button = jQuery(element);
+        pressed_button = jQuery(element);
 
-        if (button.hasClass('disabled')) {
+        if (pressed_button.hasClass('disabled')) {
             return false;
         }
 
-        this.setupActiveButton(button);
+        this.setupActiveButton(pressed_button);
         this.blockToolbarButtons();
 
         jQuery('#recordset_action').value = element.id;
@@ -52,9 +52,9 @@ var Grid = new function() {
         alert('success');
     };
 
-    this.setupActiveButton = function(button) {
-        button.addClass('toolbar_ajax_blocker');
-        button.html('Sending...');
+    this.setupActiveButton = function(pressed_button) {
+        pressed_button.addClass('toolbar_ajax_blocker');
+        pressed_button.html('Sending...');
     };
 
     this.restoreActiveButton = function() {
