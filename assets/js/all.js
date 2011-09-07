@@ -22,6 +22,8 @@ var CreateRecordWindow = new function() {
 
 var Grid = new function() {
 
+    var that = this;
+
     this.doMassAction = function (element) {
         button = jQuery(element);
 
@@ -37,15 +39,15 @@ var Grid = new function() {
     };
 
     this.massActionError = function() {
-        this.restoreActiveButton();
-        this.releaseToolbarButtons();
+        that.restoreActiveButton();
+        that.releaseToolbarButtons();
 
         alert('error');
     };
 
     this.massActionSuccess = function() {
-        this.restoreActiveButton();
-        this.releaseToolbarButtons();
+        that.restoreActiveButton();
+        that.releaseToolbarButtons();
 
         alert('success');
     };
@@ -182,8 +184,8 @@ function submitGridMassAction(e){
         type: form.attr('method'),
         data: form.serialize(),
         dataType: 'json',
-        success: function() {alert('success');},
-        error: Grid.massActionError()
+        success: Grid.massActionSuccess,
+        error: Grid.massActionError
     });
 }
 
