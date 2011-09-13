@@ -19,3 +19,4 @@ for target in pipe.targets.all():
     target_runner = TargetRunnerFactory.get_runner(target)
     if target_runner.enabled:
 	target_runner.send(msg)
+	

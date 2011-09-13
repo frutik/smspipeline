@@ -64,21 +64,28 @@ def add(request):
 
     return HttpResponse('')
 
-def set_enabled_many(ids, state):
+def process_many(ids, record_processor, **kwarg):
     records = Target.objects.in_bulk(map(int,ids))
     for k,record in records.items():
-        record.enabled = state
-        record.save()
+        record_processor(record, **kwarg)
+
     return HttpResponse('')
+
+def enable_record(record, enabled):
+    record.enabled = enabled
+    record.save()
+
+def delete_record(record):
+    record.delete()
 
 def enable_many(ids):
-    return set_enabled_many(ids, True)
+    return process_many(ids, enable_record, enabled=True)
 
 def disable_many(ids):
-    return set_enabled_many(ids, False)
+    return process_many(ids, enable_record, enabled=False)
 
-def delete_many(ids):
-    return HttpResponse('')
+def delete_many(ids, **kwarg):
+    return process_many(ids, delete_record)
 
 MASS_ACTION_HANDLER = {
     'delete_many': delete_many,

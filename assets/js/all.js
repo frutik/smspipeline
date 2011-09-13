@@ -20,6 +20,21 @@ var CreateRecordWindow = new function() {
     };
 };
 
+var ActionResultMessage = new function() {
+
+    this.show = function(message, type, autohide_timeout) {
+        $('#success_message_body').html(message);
+        $('#success_message').show();
+        if (autohide_timeout) {
+            setTimeout(hide_success, autohide_timeout);
+        }
+    };
+
+    this.hide = function() {
+        $('#success_message').hide();
+    };
+};
+
 var Grid = new function() {
 
     var that = this;
@@ -200,17 +215,4 @@ function submitGridMassAction(e){
         success: Grid.massActionSuccess,
         error: Grid.massActionError
     });
-}
-
-function show_success(message, autohide_timeout) {
-    $('#success_message_body').html(message);
-    $('#success_message').show();
-
-    if (autohide_timeout) {
-        setTimeout(hide_success, autohide_timeout);
-    }
-}
-
-function hide_success() {
-    $('#success_message').hide();
 }

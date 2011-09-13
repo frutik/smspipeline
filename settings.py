@@ -134,15 +134,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
-    #'mlang',
-    # Uncomment the next line to enable the admin:
-    #'sharded',
     'app',
     'pipelines',
     'targets',
     'registration',
     'adressbook',
     'message_template',
+    'service_poller',
 )
 
 INSTALLED_APPS += (
