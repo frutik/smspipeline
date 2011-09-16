@@ -8,10 +8,10 @@ urlpatterns = patterns('',
     
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', name="auth_login"),
     #url(r'^accounts/profile/$', redirect, {'url': '/'}),
-    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout_then_login', name="auth_logout"),
-    url(r'^accounts/', include('registration.urls')),
+    #url(r'^accounts/logout/$', 'django.contrib.auth.views.logout_then_login', name="auth_logout"),
+    #url(r'^accounts/', include('registration.urls')),
 
-    url(r'^targets/', include('targets.urls')),
+#    url(r'^targets/', include('targets.urls')),
     url(r'^pipelines/', include('pipelines.urls')),
     url(r'^message_template/', include('message_template.urls')),
     url(r'^adressbook/', include('adressbook.urls')),
