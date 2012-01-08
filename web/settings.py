@@ -182,7 +182,10 @@ LOGGING = {
     }
 }
 
-from smspipeline.mail import *
-
+try:
+    from mail import *
+except:
+    pass
+    
 GRID_TEMPLATE='common/grid.html'
 MEDIUM_COLUMN_WIDTH='150px'
