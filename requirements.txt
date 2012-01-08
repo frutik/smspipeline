@@ -5,3 +5,9 @@ psycopg2
 # aws
 boto
 django-storages
+
+django-chart-tools
+django-admin-user-stats
+django-admin-tools
+
+django-registration
