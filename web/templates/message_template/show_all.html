@@ -9,9 +9,9 @@
         var url_record_add = '{% url message_template_add %}';
     </script>
 
-    <link rel="stylesheet" type="text/css" href="http://localhost/smspipeline/assets/css/show_all.css" />
-    <script type="text/javascript" src="http://localhost/smspipeline/assets/js/show_all.js"></script>
-    <script type="text/javascript" src="http://localhost/smspipeline/assets/js/crud.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}app/css/show_all.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}app/js/show_all.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/js/crud.js"></script>
 
     {# Success message #}
     {% include "common/message_box.html" %}

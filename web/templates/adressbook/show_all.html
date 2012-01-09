@@ -9,8 +9,8 @@
         var url_record_add = '{% url adressbook_add %}';
     </script>
 
-    <link rel="stylesheet" type="text/css" href="http://localhost/smspipeline/assets/css/show_all.css" />
-    <script type="text/javascript" src="http://localhost/smspipeline/assets/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}app/css/show_all.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}app/js/all.js"></script>
 
     {# Success message #}
     {% include "common/message_box.html" %}
