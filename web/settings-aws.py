@@ -60,10 +60,6 @@ MEDIA_URL = ''
 # Example: "/home/media/media.lawrence.com/static/"
 #STATIC_ROOT = '/home/frutik/work/smspipeline/static'
 
-# URL prefix for static files.
-# Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
-
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
@@ -73,6 +69,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 STATICFILES_DIRS = (
     #'libs/twitter-bootstrap',
     'extras',
+    'assets',
     #'/usr/local/lib/python2.7/dist-packages/django_admin_tools-0.4.0-py2.7.egg/admin_tools/media',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
@@ -207,3 +204,5 @@ AWS_STORAGE_BUCKET_NAME = ''
 #}
 
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+STATIC_URL = 'http://s3.amazonaws.com/' + AWS_STORAGE_BUCKET_NAME + '/'
