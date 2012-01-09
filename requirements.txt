@@ -9,5 +9,9 @@ django-storages
 django-chart-tools
 django-admin-user-stats
 django-admin-tools
+django-qsstats-magic
+python-dateutil
 
 django-registration
+
+simplejson
