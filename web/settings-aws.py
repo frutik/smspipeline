@@ -194,7 +194,7 @@ MEDIUM_COLUMN_WIDTH='150px'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-from aws_credentials import all
+from aws_credentials import *
 
 #AWS_HEADERS = {
 #    'Expires': 'Thu, 15 Apr 2010 20:00:00 GMT',
