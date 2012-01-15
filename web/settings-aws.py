@@ -63,7 +63,6 @@ MEDIA_URL = ''
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -204,3 +203,4 @@ from aws_credentials import *
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 STATIC_URL = 'http://s3.amazonaws.com/' + AWS_STORAGE_BUCKET_NAME + '/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
