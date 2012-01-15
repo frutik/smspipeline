@@ -23,8 +23,11 @@ def show_all(request):
     else:
         template = full_template
 
-    columns = records[0].grid_columns
-
+    try:
+	columns = records[0].grid_columns
+    except:
+	columns = None
+    
     return render_to_response(template, {'records':records, 'columns':columns, 'grid_template':grid_template}, RequestContext(request))
 
 @login_required
