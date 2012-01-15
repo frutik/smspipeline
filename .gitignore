@@ -13,3 +13,4 @@ static
 credentials.py
 smspipeline
 mail.py
+web/aws_credentials.py
